@@ -4,6 +4,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { ApolloServer } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import cors from 'cors';
 
 import path from 'path';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
@@ -21,12 +22,13 @@ const port = process.env.PORT || 4010;
 (async () => {
   const app = express();
   app.use(bodyParser.json());
+  app.use(cors());
 
   app.get('/', (_, res) => res.send('server is running'));
 
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req , res }) => {
+    context: ({ req, res }) => {
       return {
         req,
         res,
