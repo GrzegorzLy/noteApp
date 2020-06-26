@@ -1,23 +1,30 @@
 import React, { ReactElement } from 'react';
 import Layout from './components/Layout';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { Router } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
+import { createBrowserHistory } from 'history';
 
-const NOTES = gql`
-    {
-        notes {
-            id
-            text
-            date
-        }
-    }
-`;
+import { theme } from './styles/theme';
+import GlobalStyle from './styles/global';
+import client from './client';
+import Routes from './routes';
+
+const history = createBrowserHistory();
 
 const App: React.SFC = (): ReactElement => {
-    const { loading, error, data } = useQuery(NOTES);
-    console.log(data);
-
-    return <Layout>test</Layout>;
+    return (
+        <ApolloProvider client={client}>
+            <ThemeProvider theme={theme}>
+                <GlobalStyle />
+                <Router history={history}>
+                    <Layout>
+                        <Routes />
+                    </Layout>
+                </Router>
+            </ThemeProvider>
+        </ApolloProvider>
+    );
 };
 
 export default App;

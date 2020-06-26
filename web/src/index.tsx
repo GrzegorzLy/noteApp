@@ -1,22 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { ApolloProvider } from '@apollo/react-hooks';
-
 import * as serviceWorker from './serviceWorker';
-import { ThemeProvider } from 'styled-components';
-import { theme } from './styles/theme';
-import GlobalStyle from './styles/global';
-import client from './client';
 
 ReactDOM.render(
     <React.StrictMode>
-        <ApolloProvider client={client}>
-            <ThemeProvider theme={theme}>
-                <GlobalStyle />
-                <App />
-            </ThemeProvider>
-        </ApolloProvider>
+        <App />
     </React.StrictMode>,
     document.getElementById('root'),
 );
