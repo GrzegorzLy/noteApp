@@ -4,18 +4,19 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { ApolloServer } from 'apollo-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+
 import path from 'path';
 import { fileLoader, mergeTypes, mergeResolvers } from 'merge-graphql-schemas';
+import services from './services';
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './modules/**/*.graphql')));
 const resolvers = mergeResolvers(fileLoader(path.join(__dirname, './modules/**/*.resolver.ts')));
-
 const schema = makeExecutableSchema({
   typeDefs,
   resolvers,
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4010;
 
 (async () => {
   const app = express();
@@ -25,10 +26,11 @@ const port = process.env.PORT || 3000;
 
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req, res }) => {
+    context: ({ req , res }) => {
       return {
         req,
         res,
+        services,
       };
     },
   });
