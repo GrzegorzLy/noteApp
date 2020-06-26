@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react';
+import Layout from './components/Layout';
 
 const App: React.SFC = (): ReactElement => {
-    return <div>test</div>;
+    return <Layout>test</Layout>;
 };
 
 export default App;
