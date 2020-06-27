@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { NoteType } from '../../../types/types';
 import { Link } from 'react-router-dom';
-import Button from '../../../components/Button';
+import { ButtonDanger } from '../../../components/Button';
 
 const Wrapper = styled.div`
-    margin: 1.5rem;
+    margin: 1.5rem 0;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
@@ -43,7 +43,7 @@ const NotesItem: FC<NoteType & remove> = ({ text, date, id, onRemove }) => {
                 <Date to={url}>{date}</Date>
             </Content>
 
-            <Button onClick={onClick}>Delate note</Button>
+            <ButtonDanger onClick={onClick}>Delate note</ButtonDanger>
         </Wrapper>
     );
 };

@@ -1,25 +1,10 @@
 import React, { FC, useCallback } from 'react';
-import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import NotesItem from './components/NotesItem';
 import { NoteType } from '../../types/types';
 import styled from 'styled-components';
-
-const NOTES = gql`
-    {
-        notes {
-            id
-            text
-            date
-        }
-    }
-`;
-
-const REMOVE_NOTE = gql`
-    mutation removeNote($id: String!) {
-        removeNote(id: $id)
-    }
-`;
+import NotesAdd from './components/NotesAdd';
+import { NOTES, REMOVE_NOTE, ADD_NOTE } from '../../graphql';
 
 const Wrapper = styled.div`
     display: flex;
@@ -29,6 +14,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
     max-width: 1000px;
     width: 100%;
+    padding: 1rem;
 `;
 
 const Title = styled.h1`
@@ -47,18 +33,27 @@ const Notes: FC = () => {
         refetchQueries: [{ query: NOTES }],
         awaitRefetchQueries: true,
     });
+    const [add, { loading: addLoading }] = useMutation(ADD_NOTE, {
+        refetchQueries: [{ query: NOTES }],
+        awaitRefetchQueries: true,
+    });
 
     const onRemove = useCallback(
-        (id: string) => () => {
-            remove({ variables: { id } });
+        (id: string) => async () => {
+            await remove({ variables: { id } });
         },
         [remove],
     );
+
+    const onAdd = useCallback(async (text: string) => {
+        await add({ variables: { text } });
+    }, []);
 
     const notes = (data && data.notes) || [];
     return (
         <Wrapper>
             <Container>
+                <NotesAdd onAdd={onAdd} isLoading={addLoading} />
                 <Title>Latest Notes</Title>
                 {error && <Error>{error.message}</Error>}
                 {loading && <Loading>Loading notes...</Loading>}

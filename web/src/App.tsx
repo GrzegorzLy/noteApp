@@ -7,7 +7,7 @@ import { createBrowserHistory } from 'history';
 
 import { theme } from './styles/theme';
 import GlobalStyle from './styles/global';
-import client from './client';
+import client from './graphql/client';
 import Routes from './routes';
 
 const history = createBrowserHistory();

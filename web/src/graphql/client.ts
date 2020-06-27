@@ -1,4 +1,4 @@
-import config from './config';
+import config from '../config';
 import ApolloClient from 'apollo-boost';
 
 const client = new ApolloClient({
