@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { FC, useCallback } from 'react';
 import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import NotesItem from './components/NotesItem';
+import { NoteType } from '../../types/types';
+import styled from 'styled-components';
 
 const NOTES = gql`
     {
@@ -12,10 +15,58 @@ const NOTES = gql`
     }
 `;
 
-const Notes = () => {
-    const { loading, error, data } = useQuery(NOTES);
+const REMOVE_NOTE = gql`
+    mutation removeNote($id: String!) {
+        removeNote(id: $id)
+    }
+`;
 
-    return <div>{JSON.stringify(data)}</div>;
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
+const Container = styled.div`
+    max-width: 1000px;
+    width: 100%;
+`;
+
+const Title = styled.h1`
+    text-align: center;
+    color: ${({ theme }) => theme.colors.mainDark};
+    font-size: ${({ theme }) => theme.fontsSize['2xl']};
+    font-weight: 600;
+`;
+
+const Loading = styled.div``;
+const Error = styled.div``;
+
+const Notes: FC = () => {
+    const { loading, error, data } = useQuery(NOTES);
+    const [remove] = useMutation(REMOVE_NOTE, {
+        refetchQueries: [{ query: NOTES }],
+        awaitRefetchQueries: true,
+    });
+
+    const onRemove = useCallback(
+        (id: string) => () => {
+            remove({ variables: { id } });
+        },
+        [remove],
+    );
+
+    const notes = (data && data.notes) || [];
+    return (
+        <Wrapper>
+            <Container>
+                <Title>Latest Notes</Title>
+                {error && <Error>{error.message}</Error>}
+                {loading && <Loading>Loading notes...</Loading>}
+                {!loading &&
+                    notes.map((note: NoteType) => <NotesItem key={note.id} onRemove={onRemove} {...note}></NotesItem>)}
+            </Container>
+        </Wrapper>
+    );
 };
 
 export default Notes;

@@ -9,7 +9,7 @@ const Routes: FC = () => {
             <Route exact path="/">
                 <Notes />
             </Route>
-            <Route path="/notes">
+            <Route exact path="/notes">
                 <Notes />
             </Route>
             <Route path="/notes/:id">

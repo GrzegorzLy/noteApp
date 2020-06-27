@@ -8,7 +8,9 @@ const colors = {
     black,
     white,
     main,
-    mainLight: lighten(0.6, main),
+    red: '#fb6262',
+    background: '#fbfbfb',
+    mainLight: lighten(0.99, main),
     mainDark: darken(0.45, main),
     mainDarker: darken(0.4, main),
 };
@@ -16,6 +18,8 @@ const colors = {
 const fontsSize = {
     md: '14px',
     lg: '16px',
+    xl: '18px',
+    '2xl': '20px',
 };
 
 export const theme = {
