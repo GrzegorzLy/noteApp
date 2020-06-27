@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { NoteType } from '../../../types/types';
 import { ButtonDanger, BackLinkButton } from '../../../components/Button';
+import { decode } from '../../../utils';
 
 const Wrapper = styled.div`
     margin-top: 1rem;
@@ -46,7 +47,7 @@ const NoteDetails: FC<NoteType & remove> = ({ date, text, id, onRemove }) => {
                 <ButtonDanger onClick={() => onRemove(id)}>Delate note</ButtonDanger>
             </WrapperButton>
             <Content>
-                <Text dangerouslySetInnerHTML={{ __html: text }} />
+                <Text dangerouslySetInnerHTML={{ __html: decode(text) }} />
                 <Date>{date}</Date>
             </Content>
         </Wrapper>

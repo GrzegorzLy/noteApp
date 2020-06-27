@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { NoteType } from '../../../types/types';
 import { Link } from 'react-router-dom';
 import { ButtonDanger } from '../../../components/Button';
+import { decode } from '../../../utils';
 
 const Wrapper = styled.div`
     margin: 1.5rem 0;
@@ -46,7 +47,7 @@ const NotesItem: FC<NoteType & remove> = ({ text, date, id, onRemove }) => {
     return (
         <Wrapper>
             <Content>
-                <Text dangerouslySetInnerHTML={{ __html: text }} />
+                <Text dangerouslySetInnerHTML={{ __html: decode(text) }} />
                 <Date to={url}>{date}</Date>
             </Content>
 

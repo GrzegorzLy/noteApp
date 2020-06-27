@@ -2,6 +2,7 @@ import React, { FC, FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import { ButtonMain } from '../../../components/Button';
 import { NoteInput } from '../../../types/types';
+import { sanitizeHTML, encode, decode } from '../../../utils';
 
 const Wrapper = styled.div`
     margin-bottom: 2rem;
@@ -48,7 +49,8 @@ const NotesAdd: FC<Add> = ({ isLoading, onAdd }) => {
         if (form.text.length < minLength) {
             return;
         }
-        await onAdd(form.text);
+        const clearText = encode(sanitizeHTML(form.text));
+        await onAdd(clearText);
         setForm({ text: '' });
     };
 
