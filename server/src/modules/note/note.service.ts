@@ -1,5 +1,6 @@
 import uid from 'uid';
 import { Note } from '../../types/index';
+import { sanitizeHTML } from '../../utils';
 
 export default class NoteService {
   private notes: Array<Note>;
@@ -22,7 +23,7 @@ export default class NoteService {
 
   add = (text: string) => {
     const id = uid();
-    const note = { text, id, date: new Date().toLocaleDateString() };
+    const note = { text: sanitizeHTML(text), id, date: new Date().toLocaleDateString() };
     this.notes.push(note);
     return note;
   };

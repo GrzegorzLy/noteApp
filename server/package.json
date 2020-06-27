@@ -40,6 +40,7 @@
 		"typescript": "^3.9.5"
 	},
 	"dependencies": {
+		"@types/sanitize-html": "^1.23.2",
 		"apollo-server-express": "^2.15.0",
 		"body-parser": "^1.19.0",
 		"cors": "^2.8.5",
@@ -50,6 +51,7 @@
 		"graphql-tools": "^6.0.11",
 		"merge-graphql-schemas": "^1.7.8",
 		"reflect-metadata": "^0.1.13",
+		"sanitize-html": "^1.27.0",
 		"uid": "^1.0.0"
 	}
 }
