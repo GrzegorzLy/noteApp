@@ -45,9 +45,12 @@ const Notes: FC = () => {
         [remove],
     );
 
-    const onAdd = useCallback(async (text: string) => {
-        await add({ variables: { text } });
-    }, []);
+    const onAdd = useCallback(
+        async (text: string) => {
+            await add({ variables: { text } });
+        },
+        [add],
+    );
 
     const notes = (data && data.notes) || [];
     return (

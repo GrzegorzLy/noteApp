@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 import { NoteType } from '../../../types/types';
 import { ButtonDanger, BackLinkButton } from '../../../components/Button';

@@ -28,7 +28,7 @@ const Note: FC<RouteComponentProps> = ({ history }) => {
             await remove({ variables: { id } });
             history.push('/');
         },
-        [remove],
+        [remove, history],
     );
 
     if (!loading && !data.note) {
