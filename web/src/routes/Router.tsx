@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Notes from './notes';
 import Note from './note';
+import NotFound from './notFound';
 
 const Routes: FC = () => {
     return (
@@ -14,6 +15,9 @@ const Routes: FC = () => {
             </Route>
             <Route path="/notes/:id">
                 <Note />
+            </Route>
+            <Route path="/404">
+                <NotFound />
             </Route>
         </Switch>
     );

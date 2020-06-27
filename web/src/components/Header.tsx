@@ -1,5 +1,11 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+const Title = styled(Link)`
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.mainDark};
+`;
 
 const Wrapper = styled.div`
     padding: 0.75rem;
@@ -9,7 +15,11 @@ const Wrapper = styled.div`
 `;
 
 const Header: FC = () => {
-    return <Wrapper>Notes App</Wrapper>;
+    return (
+        <Wrapper>
+            <Title to="/">Notes App</Title>
+        </Wrapper>
+    );
 };
 
 export default Header;

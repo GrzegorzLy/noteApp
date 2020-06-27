@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { lighten, darken } from 'polished';
+import { Link } from 'react-router-dom';
 
 const BaseButton = css`
     padding: 0.5rem 0.75rem;
@@ -46,4 +47,23 @@ export const ButtonMain = styled.button`
             background-color: ${darken(0.05, 'white')}};
         }
     }
+`;
+
+export const BackLinkButton = styled(Link)`
+    ${BaseButton};
+    background-color:  ${({ theme }) => theme.colors.main};
+    border: 1px solid ${({ theme }) => darken(0.1, theme.colors.main)};
+    color: ${({ theme }) => theme.colors.mainDark};
+    text-decoration: none;
+    min-width: unset;
+    &:disabled {
+        color: ${({ theme }) => lighten(0.4, theme.colors.mainDark)};
+    };
+
+    @media (hover: hover) {
+        &:active,
+        &:hover {
+            background-color: ${darken(0.05, 'white')}};
+        }
+    };
 `;

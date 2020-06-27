@@ -11,10 +11,17 @@ const Wrapper = styled.div`
     justify-content: space-between;
     background-color: ${({ theme }) => theme.colors.main};
     align-items: center;
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+        justify-content: flex-start;
+        text-align: left;
+    }
 `;
 
 const Content = styled.div`
     color: ${({ theme }) => theme.colors.mainDark};
+    width: 100%;
 `;
 const Text = styled.div`
     height: 3.75rem;
