@@ -1,16 +1,16 @@
 type Note {
-	id: Int!
+	id: String!
 	text: String!
 	date: String!
 }
 
 type Query {
 	notes: [Note!]
-	note(id: Int!): Note
+	note(id: String!): Note
 }
 
 
 type Mutation {
 	addNote(text: String!): Note
-	removeNote(id: Int!): Boolean
+	removeNote(id: String!): Boolean
 }
